@@ -1,0 +1,22 @@
+body {
+  background-image: url("../images/femshep.png");
+  background-size: cover;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: white;
+}
+
+p {
+  color: white;
+}
+
+.title {}
+
+.timer-and-question {
+  margin-top: 40%;
+}
+
+.button-container {
+  margin-top: 40%;
+}

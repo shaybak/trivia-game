@@ -184,3 +184,5 @@ function playGame() {
   getValues();
   userInterface();
 }
+
+playGame();
