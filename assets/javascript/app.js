@@ -1,4 +1,9 @@
-//jshint esversion: 6
+
+
+
+
+// *******************************************************
+// GLOBAL VARIABLES:
 
 // Set global variables
 var rightAnswers = 0;
@@ -41,49 +46,53 @@ var triviaQuestions = [{
 ];
 
 
+
+
+// *******************************************************
+// GAME VALUES AND USER INTERFACE
+
+
+function initializeGame() {
+  // Make sure timeLeft is set (or reset) to 25
+  timeLeft = 25;
+
+  // Display countdown in the UI
+  $(".time-left").text(timeLeft);
+}
+
+
+
+
 // This is where we'll select a question for the current game session:
 function getQuestion() {
 
   if (triviaQuestions.length >= 1) {
 
+    // We'll get the index of a random question object from the main array here:
     randomIndex = Math.floor(Math.random() * triviaQuestions.length);
-    console.log(randomIndex);
+    // console.log(randomIndex);
 
+    // We assign the associated correct question answer to the global correctAnswer variable
     correctAnswer = triviaQuestions[randomIndex].correct;
-    console.log(correctAnswer);
+    // console.log(correctAnswer);
 
+    // Each answer choice is also assigned to a variable for ease of access
     answer1 = triviaQuestions[randomIndex].choices[0];
     answer2 = triviaQuestions[randomIndex].choices[1];
     answer3 = triviaQuestions[randomIndex].choices[2];
     answer4 = triviaQuestions[randomIndex].choices[3];
 
+    // We call the assignValues function from here to move to the next step
     assignValues();
 
   } else {
+
+    // If there are no more questions to choose from, we send the user to the endGame interface
     endGame();
   }
 }
 
 
-function endGame() {
-
-
-
-  // Ask the user if they'd like to play again.
-  confirm("You've completed all questions. Would you like to play again?");
-
-  // If they confirm, do a full reset of all game parameters
-  if (confirm) {
-    fullReset();
-  }
-
-}
-
-function initializeGame() {
-  // Make sure timeLeft is set (or reset) to 25
-  timeLeft = 25;
-  $(".time-left").text(timeLeft);
-}
 
 
 function assignValues() {
@@ -93,9 +102,11 @@ function assignValues() {
   // a default stop before starting the countdown again seemed to fix the issue
   stopCountdown();
 
+  // Make sure timeLeft is displayed properly (might be able to remove)
   timeLeft = 25;
   $(".time-left").text(timeLeft);
 
+  // Add picture to the HTML page based on
   displayHint();
 
   // Call random question
@@ -112,6 +123,9 @@ function assignValues() {
 }
 
 
+
+
+// This function allows the user to interact with the game
 function userInterface() {
 
   $("#answer-choice1").on("click", function() {
@@ -161,6 +175,9 @@ function userInterface() {
 }
 
 
+
+// This function determines if the user's answer was correct or not
+// and adjusts accordingly
 function winLose() {
 
   if (userAnswer === correctAnswer) {
@@ -173,32 +190,6 @@ function winLose() {
 
 }
 
-
-function decrement() {
-
-  timeLeft--;
-
-  $(".time-left").text(timeLeft);
-
-  if (timeLeft === 0) {
-    stopCountdown();
-    answerScreen("Time's up!");
-  }
-}
-
-
-function stopCountdown() {
-
-  clearInterval(intervalId);
-
-}
-
-
-function countdownTimer() {
-
-  intervalId = setInterval(decrement, 1000);
-
-}
 
 
 function answerScreen(result) {
@@ -219,6 +210,8 @@ function answerScreen(result) {
 
 }
 
+
+
 function displayHint() {
 
   if (correctAnswer === "Thessia") {
@@ -233,6 +226,8 @@ function displayHint() {
 
 }
 
+
+
 function resetGame() {
 
   stopCountdown();
@@ -246,6 +241,22 @@ function resetGame() {
     }
   }
 }
+
+
+
+function endGame() {
+
+  // Ask the user if they'd like to play again.
+  confirm("You've completed all questions. Would you like to play again?");
+
+  // If they confirm, do a full reset of all game parameters
+  if (confirm) {
+    fullReset();
+  }
+
+}
+
+
 
 function fullReset() {
 
@@ -294,6 +305,38 @@ function fullReset() {
 
 }
 
+// *******************************************************
+// Timer functions:
+
+function decrement() {
+
+  timeLeft--;
+
+  $(".time-left").text(timeLeft);
+
+  if (timeLeft === 0) {
+    stopCountdown();
+    answerScreen("Time's up!");
+  }
+}
+
+
+function stopCountdown() {
+
+  clearInterval(intervalId);
+
+}
+
+
+function countdownTimer() {
+
+  intervalId = setInterval(decrement, 1000);
+
+}
+
+
+// *******************************************************
+// playGame() functions and call:
 
 function playGame() {
   initializeGame();
