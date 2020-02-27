@@ -58,6 +58,8 @@ function getValues() {
   correctAnswer = triviaQuestions[randomIndex].correct;
   console.log(correctAnswer);
 
+  displayHint();
+
   // Call random question
   $(".question").text(triviaQuestions[randomIndex].question);
 
@@ -175,6 +177,20 @@ function answerScreen(result) {
   } else if (randomIndex === 3) {
     $(".question").text(result);
     setTimeout(getValues, 5000);
+  }
+
+}
+
+function displayHint() {
+
+  if (correctAnswer === "Thessia") {
+    $(".image-div").html("<img class='hint-img' src='assets/images/" + correctAnswer + ".png'>");
+  } else if (correctAnswer === "Migrant") {
+    $(".image-div").html("<img class='hint-img' src='assets/images/" + correctAnswer + ".png'>");
+  } else if (correctAnswer === "Quarians") {
+    $(".image-div").html("<img class='hint-img' src='assets/images/" + correctAnswer + ".png'>");
+  } else if (correctAnswer === "Nihlus") {
+    $(".image-div").html("<img class='hint-img' src='assets/images/" + correctAnswer + ".png'>");
   }
 
 }
