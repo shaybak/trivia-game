@@ -1,24 +1,29 @@
-body {
-  /* background-image: url("../images/femshep.png");
-  background-size: cover; */
+.jumbotron {
+  background-image: url("../images/femshep.png");
+  background-size: cover;
 }
 
 h1, h2, h3, h4, h5, h6 {
+  font-family: 'Orbitron';
+}
+
+.title {
   color: white;
+  font-size: 5rem;
 }
 
 p {
-  color: white;
+  font-family: 'Orbitron';
 }
 
 .title {}
 
 .timer-and-question {
-  margin-top: 20%;
+  margin-top: 1%;
 }
 
 .button-container {
-  margin-top: 20%;
+  margin-top: 1%;
 }
 
 .image-div {

@@ -5,7 +5,7 @@
   <meta charset="utf-8">
 
   <!-- Google Fonts -->
-
+  <link href="https://fonts.googleapis.com/css?family=Orbitron&display=swap" rel="stylesheet">
 
   <!-- Bootstrap -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -18,43 +18,47 @@
 
 <body>
 
+
+  <div class="jumbotron">
+    <h1 class="title">Mass Effect Trivia</h1>
+  </div>
+
   <div class="container user-interface">
-<div class="row">
+
+    <div class="row">
 
 
+      <div class="col-md-8 timer-and-question">
+
+        <h3>Time left: <span class="time-left">25</span> seconds</h3>
+
+        <h3 class="question">The question will appear here.</h3>
+
+        <div class="container image-div">
+
+        </div>
+      </div>
 
 
-    <div class="col-md-12 title">
-      <h1>Mass Effect Trivia</h1>
+      <div class="col-md-4 button-container">
+
+        <button type="button" name="button" class="btn btn-primary btn-sm btn-block" id="answer-choice1"></button><br>
+        <button type="button" name="button" class="btn btn-primary btn-sm btn-block" id="answer-choice2"></button><br>
+        <button type="button" name="button" class="btn btn-primary btn-sm btn-block" id="answer-choice3"></button><br>
+        <button type="button" name="button" class="btn btn-primary btn-sm btn-block" id="answer-choice4"></button><br>
+      </div>
+
+
     </div>
-</div>
-<div class="row">
 
-
-    <div class="col-md-8 timer-and-question">
-
-      <h3>Time left: <span class="time-left">25</span> seconds</h3>
-
-      <h3 class="question">The question will appear here.</h3>
+    <div class="container score">
+      <p class="right-answers"># of right answers</p>
+      <p class="wrong-answers"># of wrong answers</p>
     </div>
-
-    <div class="col-md-4 button-container">
-
-      <button type="button" name="button" class="btn btn-primary btn-sm btn-block" id="answer-choice1"></button><br>
-      <button type="button" name="button" class="btn btn-primary btn-sm btn-block" id="answer-choice2"></button><br>
-      <button type="button" name="button" class="btn btn-primary btn-sm btn-block" id="answer-choice3"></button><br>
-      <button type="button" name="button" class="btn btn-primary btn-sm btn-block" id="answer-choice4"></button><br>
-    </div>
-
-    <!-- <p class="right-answers"># of right answers</p>
-    <p class="wrong-answers"># of wrong answers</p> -->
-</div>
 
   </div>
 
-<div class="container image-div">
 
-</div>
 
 
   <!-- jQuery -->
