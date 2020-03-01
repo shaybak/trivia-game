@@ -346,32 +346,23 @@ function endGame() {
 
 }
 
-
-
 function fullReset() {
-
-
-  //  NOTE -- This function was working perfectly with my basic four test questions.
-  // It's no longer working, which seems to be symptomatic of adding more questions.
-  // I tried mutliple fixes and googled a TON, but can't seem to figure out
-  // why this is so broken...thoughts would be greatly appreciated.
-
 
   stopCountdown();
 
-  // Remove endGameDiv
-  $(".end-game-div-2").remove();
+  $(".end-game-div").empty();
 
   // Show hidden elements
+
   $(".time-left").show();
   $(".time-left-nested").show();
   $("button").show();
   $(".image-div").show();
   $(".question").show();
 
-
   // Reset question element
   $(".question").text("The question will appear here.");
+
 
 
   // Reset global variables
@@ -389,7 +380,7 @@ function fullReset() {
   intervalId = "";
 
   // Set up question and answers array
-  var triviaQuestions = [{
+  triviaQuestions = [{
       question: "The asari are native to which planet?",
       choices: ["Palaven", "Tuchanka", "Thessia", "Rannoch", ],
       correct: "Thessia"
