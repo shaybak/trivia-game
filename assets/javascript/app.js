@@ -14,6 +14,7 @@ var questionArray = [];
 var randomIndex = "";
 var timeLeft = 25;
 var intervalId;
+var endGameDiv = $("<div>");
 
 // Set up question and answers array
 var triviaQuestions = [{
@@ -39,26 +40,31 @@ var triviaQuestions = [{
     choices: ["Benezia", "Garrus", "Saren", "Nihlus", ],
     correct: "Nihlus"
   },
-  // {
-  //   question: "Which squad member can often be found engaged in calibrations?",
-  //   choices: ["Garrus", "Jack", "Miranda", "Kaiden", ],
-  //   correct: "Garrus"
-  // },
-  // {
-  //   question: "The mobile unit eventually inhabited by EDI was created by which organization?",
-  //   choices: ["Alliance", "C-Sec", "Cerberus", "Special Tasks Group", ],
-  //   correct: "Cerberus"
-  // },
-  // {
-  //   question: "This squad member is a scientific genius and also enjoys showtunes.",
-  //   choices: ["Kasumi", "Mordin", "Zaeed", "Legion", ],
-  //   correct: "Mordin"
-  // },
-  // {
-  //   question: "The Krogan are a species unethically sterilized during the Krogan Rebellions by a biological weapon known as the [___].",
-  //   choices: ["genophage", "great sleep", "bio-cache", "genomix refraction", ],
-  //   correct: "genophage",
-  // }
+
+  {
+    question: "Which squad member can often be found engaged in calibrations?",
+    choices: ["Garrus", "Jack", "Miranda", "Kaiden", ],
+    correct: "Garrus"
+  },
+
+  {
+    question: "The mobile unit eventually inhabited by EDI was created by which organization?",
+    choices: ["Alliance", "C-Sec", "Cerberus", "Special Tasks Group", ],
+    correct: "Cerberus"
+  },
+
+  {
+    question: "This squad member is a scientific genius and also enjoys show tunes.",
+    choices: ["Kasumi", "Mordin", "Zaeed", "Legion", ],
+    correct: "Mordin"
+  },
+
+  {
+    question: "The Krogan are a species unethically sterilized during the Krogan Rebellions by a biological weapon known as the [___].",
+    choices: ["genophage", "great sleep", "bio-cache", "genomix refraction", ],
+    correct: "genophage",
+  }
+
 ];
 
 
@@ -107,6 +113,7 @@ function getQuestion() {
 
     // If there are no more questions to choose from, we send the user to the endGame interface
     endGame();
+
   }
 }
 
@@ -202,13 +209,11 @@ function winLose() {
   if (userAnswer === correctAnswer) {
 
     rightAnswers++;
-    // $(".right-answers").text(rightAnswers);
     answerScreen("Correct!");
 
   } else {
 
     wrongAnswers++;
-    // $(".wrong-answers").text(wrongAnswers);
     answerScreen("Wrong answer!");
 
   }
@@ -219,18 +224,21 @@ function winLose() {
 
 function answerScreen(result) {
 
-  if (randomIndex === 0) {
-    $(".question").text(result);
+  $(".question").text(result);
+
+  if (result === "Wrong answer!" || result === "Time's up!") {
+
+    var correction = $("<h3>");
+    correction.text("The correct answer is: " + correctAnswer);
+
+    $(".question").append(correction);
+
     setTimeout(resetGame, 3000);
-  } else if (randomIndex === 1) {
-    $(".question").text(result);
+
+  } else {
+
     setTimeout(resetGame, 3000);
-  } else if (randomIndex === 2) {
-    $(".question").text(result);
-    setTimeout(resetGame, 3000);
-  } else if (randomIndex === 3) {
-    $(".question").text(result);
-    setTimeout(resetGame, 3000);
+
   }
 
 }
@@ -246,6 +254,14 @@ function displayHint() {
   } else if (correctAnswer === "Quarians") {
     $(".image-div").html("<img class='hint-img' src='assets/images/" + correctAnswer + ".png'>");
   } else if (correctAnswer === "Nihlus") {
+    $(".image-div").html("<img class='hint-img' src='assets/images/" + correctAnswer + ".png'>");
+  } else if (correctAnswer === "Garrus") {
+    $(".image-div").html("<img class='hint-img' src='assets/images/" + correctAnswer + ".png'>");
+  } else if (correctAnswer === "Cerberus") {
+    $(".image-div").html("<img class='hint-img' src='assets/images/" + correctAnswer + ".png'>");
+  } else if (correctAnswer === "Mordin") {
+    $(".image-div").html("<img class='hint-img' src='assets/images/" + correctAnswer + ".png'>");
+  } else if (correctAnswer === "genophage") {
     $(".image-div").html("<img class='hint-img' src='assets/images/" + correctAnswer + ".png'>");
   }
 
@@ -263,6 +279,7 @@ function resetGame() {
       triviaQuestions.splice(i, 1);
 
       getQuestion();
+
     }
   }
 }
@@ -272,17 +289,15 @@ function resetGame() {
 function endGame() {
 
   // Hide unnecessary elements
+
   $(".time-left").hide();
   $(".time-left-nested").hide();
   $("button").hide();
   $(".image-div").hide();
   $(".question").hide();
 
-
-  // 1. Create div to hold endGame elements
-  // 2. Notify the user the game is done
-  var endGameDiv = $("<div>");
-  endGameDiv.addClass("container end-game-div-2");
+  // Add class to nested end-game-div-2
+  endGameDiv.addClass("end-game-div-2");
 
   // Create game summary element
   var gameSummary = $("<h1>");
@@ -298,22 +313,10 @@ function endGame() {
   var rightElement = $("<h3>");
   var wrongElement = $("<h3>");
 
-
   // Add text to score elements
   scoreSummary.text("SCORE SUMMARY");
   rightElement.text("Right answers: " + rightAnswers);
   wrongElement.text("Wrong answers: " + wrongAnswers);
-
-
-  // Append all elements to endGameDiv
-  endGameDiv.append(gameSummary);
-  endGameDiv.append(scoreSummary);
-  endGameDiv.append(rightElement);
-  endGameDiv.append(wrongElement);
-
-  // Append endGameDiv div to parent div
-  $(".end-game-div").append(endGameDiv);
-
 
   // Create "Play Again" button
   var playAgainButton = $("<button>");
@@ -321,10 +324,24 @@ function endGame() {
   playAgainButton.addClass("btn btn-sm btn-primary play-again");
   playAgainButton.text("Play again!");
 
-  $(".end-game-div-2").append(playAgainButton);
 
-  playAgainButton.on("click", function() {
+
+  // Append all elements to endGameDiv
+  endGameDiv.append(gameSummary);
+  endGameDiv.append(scoreSummary);
+  endGameDiv.append(rightElement);
+  endGameDiv.append(wrongElement);
+  endGameDiv.append(playAgainButton);
+
+
+  // Append endGameDiv div to parent div
+  $(".end-game-div").append(endGameDiv);
+
+
+  $(".play-again").on("click", function() {
+
     fullReset();
+
   });
 
 }
@@ -333,7 +350,17 @@ function endGame() {
 
 function fullReset() {
 
+
+  //  NOTE -- This function was working perfectly with my basic four test questions.
+  // It's no longer working, which seems to be symptomatic of adding more questions.
+  // I tried mutliple fixes and googled a TON, but can't seem to figure out
+  // why this is so broken...thoughts would be greatly appreciated.
+
+
   stopCountdown();
+
+  // Remove endGameDiv
+  $(".end-game-div-2").remove();
 
   // Show hidden elements
   $(".time-left").show();
@@ -346,11 +373,6 @@ function fullReset() {
   // Reset question element
   $(".question").text("The question will appear here.");
 
-  // Remove score elements
-  $(".end-game-div-2").remove();
-
-  // Remove "Play again" button
-  $(".play-again").remove();
 
   // Reset global variables
   rightAnswers = 0;
@@ -367,28 +389,52 @@ function fullReset() {
   intervalId = "";
 
   // Set up question and answers array
-  triviaQuestions = [{
-      question: "The asari are native to the planet",
+  var triviaQuestions = [{
+      question: "The asari are native to which planet?",
       choices: ["Palaven", "Tuchanka", "Thessia", "Rannoch", ],
       correct: "Thessia"
     },
 
     {
-      question: "Banished from their homeworld, Quarians live and travel in the ________ Fleet",
+      question: "Banished from their homeworld, Quarians live and travel in the [___] Fleet",
       choices: ["Citadel", "Migrant", "Vespasian", "Auren", ],
-      correct: "Migrant",
+      correct: "Migrant"
     },
 
     {
       question: "The geth are a sentient race of machines created by which species?",
-      choices: ["Salarians", "Krogans", "Quarians", "Turians", ],
-      correct: "Quarians",
+      choices: ["Salarians", "Krogan", "Quarians", "Turians", ],
+      correct: "Quarians"
     },
 
     {
       question: "Which turian Spectre was tasked with evaluating Shepard on behalf of the Citadel Council?",
       choices: ["Benezia", "Garrus", "Saren", "Nihlus", ],
-      correct: "Nihlus",
+      correct: "Nihlus"
+    },
+
+    {
+      question: "Which squad member can often be found engaged in calibrations?",
+      choices: ["Garrus", "Jack", "Miranda", "Kaiden", ],
+      correct: "Garrus"
+    },
+
+    {
+      question: "The mobile unit eventually inhabited by EDI was created by which organization?",
+      choices: ["Alliance", "C-Sec", "Cerberus", "Special Tasks Group", ],
+      correct: "Cerberus"
+    },
+
+    {
+      question: "This squad member is a scientific genius and also enjoys show tunes.",
+      choices: ["Kasumi", "Mordin", "Zaeed", "Legion", ],
+      correct: "Mordin"
+    },
+
+    {
+      question: "The Krogan are a species unethically sterilized during the Krogan Rebellions by a biological weapon known as the [___].",
+      choices: ["genophage", "great sleep", "bio-cache", "genomix refraction", ],
+      correct: "genophage",
     }
 
   ];
