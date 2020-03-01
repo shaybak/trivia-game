@@ -18,42 +18,47 @@
 
 <body>
 
+  <div class="jumbotron-fluid">
+    <div class="container title-div">
+      <h1 class="title"> <img class="n7-img" src="assets/images/n7.png" alt=""> Mass Effect Trivia</h1>
+    </div>
 
-  <div class="jumbotron">
-    <h1 class="title">Mass Effect Trivia</h1>
   </div>
+
+
+  <div class="end-game-div">
+    <!-- This div is empty until the game ends -->
+  </div>
+
 
   <div class="container user-interface">
 
     <div class="row">
 
+      <div class="col-md-6 image-div">
+        <!-- Empty div for image hint -->
+      </div>
 
-      <div class="col-md-8 timer-and-question">
-
-        <h3>Time left: <span class="time-left">25</span> seconds</h3>
+      <div class="col-md-6 question-div">
 
         <h3 class="question">The question will appear here.</h3>
 
-        <div class="container image-div">
+        <div class="button-container">
 
+          <button type="button" name="button" class="btn btn-primary btn-lg btn-block" id="answer-choice1"></button><br>
+          <button type="button" name="button" class="btn btn-primary btn-lg btn-block" id="answer-choice2"></button><br>
+          <button type="button" name="button" class="btn btn-primary btn-lg btn-block" id="answer-choice3"></button><br>
+          <button type="button" name="button" class="btn btn-primary btn-lg btn-block" id="answer-choice4"></button><br>
         </div>
+
       </div>
-
-
-      <div class="col-md-4 button-container">
-
-        <button type="button" name="button" class="btn btn-primary btn-sm btn-block" id="answer-choice1"></button><br>
-        <button type="button" name="button" class="btn btn-primary btn-sm btn-block" id="answer-choice2"></button><br>
-        <button type="button" name="button" class="btn btn-primary btn-sm btn-block" id="answer-choice3"></button><br>
-        <button type="button" name="button" class="btn btn-primary btn-sm btn-block" id="answer-choice4"></button><br>
-      </div>
-
 
     </div>
+    <div class="row">
+      <div class="col-md-12 time-left-div">
+        <h2 class="time-left-nested">Time left: <span class="time-left"></span> </h2>
+      </div>
 
-    <div class="container score">
-      <p class="right-answers"># of right answers</p>
-      <p class="wrong-answers"># of wrong answers</p>
     </div>
 
   </div>

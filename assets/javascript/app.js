@@ -1,7 +1,3 @@
-
-
-
-
 // *******************************************************
 // GLOBAL VARIABLES:
 
@@ -21,28 +17,48 @@ var intervalId;
 
 // Set up question and answers array
 var triviaQuestions = [{
-    question: "The asari are native to the planet",
+    question: "The asari are native to which planet?",
     choices: ["Palaven", "Tuchanka", "Thessia", "Rannoch", ],
     correct: "Thessia"
   },
 
   {
-    question: "Banished from their homeworld, Quarians live and travel in the ________ Fleet",
+    question: "Banished from their homeworld, Quarians live and travel in the [___] Fleet",
     choices: ["Citadel", "Migrant", "Vespasian", "Auren", ],
-    correct: "Migrant",
+    correct: "Migrant"
   },
 
   {
     question: "The geth are a sentient race of machines created by which species?",
-    choices: ["Salarians", "Krogans", "Quarians", "Turians", ],
-    correct: "Quarians",
+    choices: ["Salarians", "Krogan", "Quarians", "Turians", ],
+    correct: "Quarians"
   },
 
   {
     question: "Which turian Spectre was tasked with evaluating Shepard on behalf of the Citadel Council?",
     choices: ["Benezia", "Garrus", "Saren", "Nihlus", ],
-    correct: "Nihlus",
-  }
+    correct: "Nihlus"
+  },
+  // {
+  //   question: "Which squad member can often be found engaged in calibrations?",
+  //   choices: ["Garrus", "Jack", "Miranda", "Kaiden", ],
+  //   correct: "Garrus"
+  // },
+  // {
+  //   question: "The mobile unit eventually inhabited by EDI was created by which organization?",
+  //   choices: ["Alliance", "C-Sec", "Cerberus", "Special Tasks Group", ],
+  //   correct: "Cerberus"
+  // },
+  // {
+  //   question: "This squad member is a scientific genius and also enjoys showtunes.",
+  //   choices: ["Kasumi", "Mordin", "Zaeed", "Legion", ],
+  //   correct: "Mordin"
+  // },
+  // {
+  //   question: "The Krogan are a species unethically sterilized during the Krogan Rebellions by a biological weapon known as the [___].",
+  //   choices: ["genophage", "great sleep", "bio-cache", "genomix refraction", ],
+  //   correct: "genophage",
+  // }
 ];
 
 
@@ -81,6 +97,8 @@ function getQuestion() {
     answer2 = triviaQuestions[randomIndex].choices[1];
     answer3 = triviaQuestions[randomIndex].choices[2];
     answer4 = triviaQuestions[randomIndex].choices[3];
+
+    // choiceValues = [answer1, answer2, answer3, answer4];
 
     // We call the assignValues function from here to move to the next step
     assignValues();
@@ -127,6 +145,7 @@ function assignValues() {
 
 // This function allows the user to interact with the game
 function userInterface() {
+
 
   $("#answer-choice1").on("click", function() {
 
@@ -181,11 +200,17 @@ function userInterface() {
 function winLose() {
 
   if (userAnswer === correctAnswer) {
+
     rightAnswers++;
+    // $(".right-answers").text(rightAnswers);
     answerScreen("Correct!");
+
   } else {
+
     wrongAnswers++;
+    // $(".wrong-answers").text(wrongAnswers);
     answerScreen("Wrong answer!");
+
   }
 
 }
@@ -246,13 +271,61 @@ function resetGame() {
 
 function endGame() {
 
-  // Ask the user if they'd like to play again.
-  confirm("You've completed all questions. Would you like to play again?");
+  // Hide unnecessary elements
+  $(".time-left").hide();
+  $(".time-left-nested").hide();
+  $("button").hide();
+  $(".image-div").hide();
+  $(".question").hide();
 
-  // If they confirm, do a full reset of all game parameters
-  if (confirm) {
+
+  // 1. Create div to hold endGame elements
+  // 2. Notify the user the game is done
+  var endGameDiv = $("<div>");
+  endGameDiv.addClass("container end-game-div-2");
+
+  // Create game summary element
+  var gameSummary = $("<h1>");
+
+  // Add text to game gameSummary
+  gameSummary.text("You've completed the game!");
+
+
+  // Create Elements to display scores
+  var scoreSummary = $("<h2>");
+  scoreSummary.addClass("score-summary");
+
+  var rightElement = $("<h3>");
+  var wrongElement = $("<h3>");
+
+
+  // Add text to score elements
+  scoreSummary.text("SCORE SUMMARY");
+  rightElement.text("Right answers: " + rightAnswers);
+  wrongElement.text("Wrong answers: " + wrongAnswers);
+
+
+  // Append all elements to endGameDiv
+  endGameDiv.append(gameSummary);
+  endGameDiv.append(scoreSummary);
+  endGameDiv.append(rightElement);
+  endGameDiv.append(wrongElement);
+
+  // Append endGameDiv div to parent div
+  $(".end-game-div").append(endGameDiv);
+
+
+  // Create "Play Again" button
+  var playAgainButton = $("<button>");
+
+  playAgainButton.addClass("btn btn-sm btn-primary play-again");
+  playAgainButton.text("Play again!");
+
+  $(".end-game-div-2").append(playAgainButton);
+
+  playAgainButton.on("click", function() {
     fullReset();
-  }
+  });
 
 }
 
@@ -262,6 +335,24 @@ function fullReset() {
 
   stopCountdown();
 
+  // Show hidden elements
+  $(".time-left").show();
+  $(".time-left-nested").show();
+  $("button").show();
+  $(".image-div").show();
+  $(".question").show();
+
+
+  // Reset question element
+  $(".question").text("The question will appear here.");
+
+  // Remove score elements
+  $(".end-game-div-2").remove();
+
+  // Remove "Play again" button
+  $(".play-again").remove();
+
+  // Reset global variables
   rightAnswers = 0;
   wrongAnswers = 0;
   userAnswer = "not chosen";
@@ -299,6 +390,7 @@ function fullReset() {
       choices: ["Benezia", "Garrus", "Saren", "Nihlus", ],
       correct: "Nihlus",
     }
+
   ];
 
   getQuestion();
@@ -316,6 +408,7 @@ function decrement() {
 
   if (timeLeft === 0) {
     stopCountdown();
+    wrongAnswers++;
     answerScreen("Time's up!");
   }
 }

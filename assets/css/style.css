@@ -1,37 +1,69 @@
-.jumbotron {
-  background-image: url("../images/femshep.png");
-  background-size: cover;
+body {
+  position: relative;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Orbitron';
 }
 
-.title {
-  color: white;
-  font-size: 5rem;
-}
-
 p {
   font-family: 'Orbitron';
 }
 
-.title {}
+.jumbotron-fluid {
+  background-image: url("../images/space-bkg.png");
+  background-color: black;
+  background-size: cover;
+}
 
-.timer-and-question {
-  margin-top: 1%;
+.n7-img {
+  width: 18%;
+  margin-right: 3%;
+}
+
+.title-div {
+  text-align: center;
+  padding: 3%;
+}
+
+.title {
+  color: white;
+  font-size: 3.75rem;
+}
+
+.question-div {
+  margin-top: 5%;
 }
 
 .button-container {
-  margin-top: 1%;
+  margin-top: 5%;
 }
 
 .image-div {
-  margin-top: 20px;
+  margin-top: 5%;
   text-align: center;
 }
 
 .hint-img {
   border-radius: 100%;
-  width: 50%;
+  width: 80%;
+  padding-right: 20px;
+}
+
+.time-left-div {
+  margin-top: 5%;
+  text-align: center;
+}
+
+.end-game-div-2 {
+  margin-top: 5%;
+  text-align: center;
+}
+
+.score-summary {
+  margin: 3% auto;
+}
+
+.play-again {
+  margin-top: 3%;
 }
