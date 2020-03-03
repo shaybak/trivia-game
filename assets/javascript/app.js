@@ -296,6 +296,9 @@ function endGame() {
   $(".image-div").hide();
   $(".question").hide();
 
+  // Clear endGameDiv
+  endGameDiv.empty();
+
   // Add class to nested end-game-div-2
   endGameDiv.addClass("end-game-div-2");
 
